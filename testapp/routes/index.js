@@ -7,31 +7,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
- 
-  if(!req.body['payload']){
-  	res.status(400);
-  	var out = {"error": "Could not decode request: JSON parsing failed"}
-  	res.send(out)
-  	return
-  }
-  
-  filtered = req.body['payload'].filter(x => {
+  try {
+
+    filtered = req.body['payload'].filter(x => {
   		return (x['workflow'] === 'completed') && (x['type'] === 'htv');
-  })
+    })
 
-  mapped = filtered.map(x => {
-  	var out = {};
-  	var address = x['address']
-  	out['concataddress'] = `${address['buildingNumber']} ${address['street']} ${address['suburb']} ${address['state']} ${address['postcode']}`
-  	out['type'] = x['type']
-  	out['workflow'] = x['workflow']
-  	return out;
-  })
+    mapped = filtered.map(x => {
+  	 var out = {};
+  	 var address = x['address']
+  	 out['concataddress'] = `${address['buildingNumber']} ${address['street']} ${address['suburb']} ${address['state']} ${address['postcode']}`
+  	 out['type'] = x['type']
+  	 out['workflow'] = x['workflow']
+  	 return out;
+    });
 
-  var response = {}
-  response['response'] = mapped
-  
-  res.send(JSON.stringify(response))
+    var response = {}
+    response['response'] = mapped  
+    res.send(JSON.stringify(response))
+  }
+
+  catch(e){    
+    var errMsg = {"error": "Could not decode request: JSON parsing failed"}
+    res.status(400).send(errMsg);    
+  }
 
 });
 

@@ -55,4 +55,15 @@ Send us the link to your solution and a link to the code in your github account.
 ### TODO
 
 1. Not handling the case where form data is not submitted as application/json for the Content-Type field
-2. Need to add tests
+2. Need to add tests like: 
+
+	`curl --data "{\"payload\": []}" -H "Content-Type: application/json" -X POST http://localhost:3000/`
+	`curl --data "{\"payload\": [1]}" -H "Content-Type: application/json" -X POST http://localhost:3000/`
+	`curl --data "{\"payload\": [1]}" -H "Content-Type: application/no-json" -X POST http://localhost:3000/`
+	`curl --data "{\"payload\": 1}" -H "Content-Type: application/json" -X POST http://localhost:3000/`
+
+
+### Deploy
+
+To push only subtree to heroku
+	`git subtree push --prefix testapp heroku master`
