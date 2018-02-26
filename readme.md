@@ -41,3 +41,18 @@ Send us the link to your solution and a link to the code in your github account.
 [Heroku](https://www.heroku.com/) - A platform-as-a-service designed for developers, free for small apps.
 
 [github](https://github.com/) - Source code hosting, free repositories for small teams.
+
+
+
+### Steps
+
+1. Started with express generator scaffold
+2. Added nodemon for automatic server refresh
+3. Added code for POST request and mappping
+4. Error handling
+
+
+### TODO
+
+1. Not handling the case where form data is not submitted as application/json for the Content-Type field
+2. Need to add tests
